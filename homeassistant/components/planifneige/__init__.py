@@ -64,7 +64,7 @@ async def async_setup(hass, config):
         """Service call to manually update the data."""
         data.update()
 
-    hass.services.async_register(DOMAIN, 'planifneige', update)
+    hass.services.async_register(DOMAIN, 'update', update)
 
     hass.async_create_task(
         async_load_platform(
