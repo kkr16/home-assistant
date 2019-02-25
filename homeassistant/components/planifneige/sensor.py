@@ -102,12 +102,12 @@ class PlanifNeigeSensor(RestoreEntity):
                 self._end_replan_date = street[6]
                 self._date_updated = street[7]
 
-    def format_dbtime(self, db_timestamp):
-        """Return DB timestamp format in ISO8601 format"""
+    @staticmethod
+    def format_dbtime(db_timestamp):
+        """Return DB timestamp format in ISO8601 format."""
         if db_timestamp is None:
             return None
-        else:
-            return datetime.strptime(db_timestamp, DB_TIMEFORMAT)
+        return datetime.strptime(db_timestamp, DB_TIMEFORMAT)
 
     @property
     def device_state_attributes(self):
