@@ -34,11 +34,11 @@ _STREET_SCHEME = vol.Schema({
 
 CONFIG_SCHEMA = vol.Schema({
     DOMAIN: vol.Schema({
-            vol.Required(CONF_API_KEY): cv.string,
-            vol.Optional(CONF_SCAN_INTERVAL,
-                         default=DEFAULT_INTERVAL): vol.All(
-                             cv.time_period, cv.positive_timedelta),
-            vol.Required(CONF_STREETS): [_STREET_SCHEME]
+        vol.Required(CONF_API_KEY): cv.string,
+        vol.Optional(CONF_SCAN_INTERVAL,
+                     default=DEFAULT_INTERVAL): vol.All(
+                         cv.time_period, cv.positive_timedelta),
+        vol.Required(CONF_STREETS): [_STREET_SCHEME]
     })
 }, extra=vol.ALLOW_EXTRA)
 
@@ -49,11 +49,12 @@ async def async_setup(hass, config):
     db_path = hass.config.path('planifneige.db')
     conf = config[DOMAIN]
 
-    pn = PlanifNeigeClient.PlanifNeigeClient(conf.get(CONF_API_KEY), db_path)
-    pn.get_planification_for_date()
+    pn_client = PlanifNeigeClient.PlanifNeigeClient(conf.get(
+        CONF_API_KEY), db_path)
+    pn_client.get_planification_for_date()
 
     data = hass.data[DATA_PLANIFNEIGE] = PlanifNeigeData(
-        hass, pn, conf.get(CONF_STREETS))
+        hass, pn_client, conf.get(CONF_STREETS))
 
     async_track_time_interval(
         hass, data.update, conf[CONF_SCAN_INTERVAL]
