@@ -14,6 +14,13 @@ _LOGGER = logging.getLogger(__name__)
 
 DB_TIMEFORMAT = '%Y-%m-%d %H:%M:%S'
 
+ATTR_STREET_SIDE_ID = 'street_side_id'
+ATTR_START_PLAN_DATE = 'start_plan_date'
+ATTR_END_PLAN_DATE = 'end_plan_date'
+ATTR_START_REPLAN_DATE = 'start_replan_date'
+ATTR_END_REPLAN_DATE = 'end_replan_date'
+ATTR_UPDATED = 'updated'
+
 STREET_STATE = {
     '0': ['Snowed', 'mdi:snowflake'],  # street is snowed in
     '1': ['Clear', 'mdi:road'],  # street is clear
@@ -113,12 +120,12 @@ class PlanifNeigeSensor(RestoreEntity):
     def device_state_attributes(self):
         """Return the state attributes."""
         return {
-            'street_side_id': self.street_id,
-            'start_plan_date': self.start_plan_date,
-            'end_plan_date': self.end_plan_date,
-            'start_replan_date': self.start_replan_date,
-            'end_replan_date': self.end_replan_date,
-            'date_updated': self.date_updated,
+            ATTR_STREET_SIDE_ID: self.street_id,
+            ATTR_START_PLAN_DATE: self.start_plan_date,
+            ATTR_END_PLAN_DATE: self.end_plan_date,
+            ATTR_START_REPLAN_DATE: self.start_replan_date,
+            ATTR_END_REPLAN_DATE: self.end_replan_date,
+            ATTR_UPDATED: self.date_updated,
             ATTR_ATTRIBUTION: PLANIFNEIGE_ATTRIBUTION
         }
 
