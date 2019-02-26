@@ -18,7 +18,7 @@ DATA_UPDATED = '{}_data_updated'.format(DOMAIN)
 
 PLANIFNEIGE_ATTRIBUTION = "Information provided by the City of Montreal "
 
-REQUIREMENTS = ['planif-neige-client==0.0.5']
+REQUIREMENTS = ['planif-neige-client==0.1.1']
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -45,11 +45,11 @@ CONFIG_SCHEMA = vol.Schema({
 
 async def async_setup(hass, config):
     """Set up the PlanifNeige component."""
-    from planif_neige_client import PlanifNeigeClient
+    from planif_neige_client import planif_neige_client
     db_path = hass.config.path('planifneige.db')
     conf = config[DOMAIN]
 
-    pn_client = PlanifNeigeClient.PlanifNeigeClient(conf.get(
+    pn_client = planif_neige_client.PlanifNeigeClient(conf.get(
         CONF_API_KEY), db_path)
     pn_client.get_planification_for_date()
 
