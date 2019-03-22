@@ -22,14 +22,14 @@ REQUIREMENTS = ['planif-neige-client==0.1.1']
 
 _LOGGER = logging.getLogger(__name__)
 
-CONF_STREETID = 'street_id'
+CONF_STREET_ID = 'street_id'
 CONF_STREETS = 'streets'
 
 DEFAULT_INTERVAL = timedelta(minutes=5)
 
-_STREET_SCHEME = vol.Schema({
+STREET_SCHEMA = vol.Schema({
     vol.Required(CONF_NAME): cv.string,
-    vol.Required(CONF_STREETID): cv.positive_int
+    vol.Required(CONF_STREET_ID): cv.positive_int
 })
 
 CONFIG_SCHEMA = vol.Schema({
@@ -38,7 +38,7 @@ CONFIG_SCHEMA = vol.Schema({
         vol.Optional(CONF_SCAN_INTERVAL,
                      default=DEFAULT_INTERVAL): vol.All(
                          cv.time_period, cv.positive_timedelta),
-        vol.Required(CONF_STREETS): [_STREET_SCHEME]
+        vol.Required(CONF_STREETS): [STREET_SCHEMA]
     })
 }, extra=vol.ALLOW_EXTRA)
 

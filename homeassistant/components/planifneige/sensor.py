@@ -1,10 +1,9 @@
 """Sensor for the City of Montreal's Planif-Neige snow removal APIs."""
-
 from datetime import datetime
 import logging
 
 from homeassistant.components.planifneige import (
-    CONF_STREETID, DATA_PLANIFNEIGE, PLANIFNEIGE_ATTRIBUTION)
+    CONF_STREET_ID, DATA_PLANIFNEIGE, PLANIFNEIGE_ATTRIBUTION)
 from homeassistant.const import ATTR_ATTRIBUTION, CONF_NAME
 from homeassistant.helpers.restore_state import RestoreEntity
 
@@ -49,7 +48,7 @@ class PlanifNeigeSensor(RestoreEntity):
         self._data = data.data
         self._state = None
         self._name = sensor[CONF_NAME]
-        self._street_id = sensor[CONF_STREETID]
+        self._street_id = sensor[CONF_STREET_ID]
         self._icon = ""
         self._start_plan_date = None
         self._end_plan_date = None
